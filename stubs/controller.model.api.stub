@@ -1,0 +1,109 @@
+<?php
+
+namespace {{ namespace }}\API;
+
+use {{ rootNamespace }}Http\Controllers\Controller;
+use {{ namespacedModel }};
+use {{ namespacedRequests }}
+use App\Http\Resources\{{ model }}Resource;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Cache;
+use App\Http\Requests\{{ model }}\{{ model }}StoreRequest;
+use App\Http\Requests\{{ model }}\{{ model }}UpdateRequest;
+
+class {{ class }} extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return response([
+            '{{ modelVariable }}' => {{ model }}Resource::collection(
+                Cache::remember('{{ modelVariable }}', 86400, function(){
+                    return {{ model }}::all();
+                })
+            ),
+            'message' => 'Retrieved Successfully'
+        ], 200 );
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \{{ namespacedStoreRequest }}  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store({{ model }}StoreRequest $request)
+    {
+        $validated = $request->validated();
+
+        ${{ modelVariable }} = {{ model }}::create($validated);
+
+        return response([
+            '{{ modelVariable }}' => new {{ model }}Resource(${{ modelVariable }}),
+            'message' => 'Created Successfully'
+        ], 200 );
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        try{
+            ${{ modelVariable }} = {{ model }}::find($id);
+
+            if(${{ modelVariable }} != null){
+                return response([
+                    '{{ modelVariable }}' => new {{ model }}Resource(${{ modelVariable }}),
+                    'message' => 'Created Successfully'
+                ], 200 );
+            }
+
+            return response([
+                'message' => 'There is no record with id: '.$id
+            ], 200 );
+
+        } catch (\Exception $exception) {
+
+            return response()->json([
+                'message' => $exception->getMessage()
+            ], 400);
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \{{ namespacedUpdateRequest }}  $request
+     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @return \Illuminate\Http\Response
+     */
+    public function update({{ model }}UpdateRequest  $request, {{ model }} ${{ modelVariable }})
+    {
+        ${{ modelVariable }}->update($request->all());
+
+        return response([
+            '{{ modelVariable }}' => new {{ model }}Resource(${{ modelVariable }}),
+            'message' => 'Created Successfully'
+        ], 200 );
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \{{ namespacedModel }}  ${{ modelVariable }}
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy({{ model }} ${{ modelVariable }})
+    {
+        ${{ modelVariable }}->delete();
+        return response (['message' => 'Deleted Successfully'], 200);
+    }
+}

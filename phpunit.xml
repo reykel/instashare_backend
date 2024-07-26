@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd" bootstrap="vendor/autoload.php" colors="true" cacheDirectory=".phpunit.cache">
+  <testsuites>
+    <testsuite name="Unit">
+      <directory suffix="Test.php">./tests/Unit</directory>
+    </testsuite>
+    <testsuite name="Feature">
+      <directory suffix="Test.php">./tests/Feature</directory>
+    </testsuite>
+  </testsuites>
+  <php>
+    <server name="APP_ENV" value="testing"/>
+    <server name="BCRYPT_ROUNDS" value="4"/>
+    <server name="CACHE_DRIVER" value="array"/>
+    <server name="DB_CONNECTION" value="mysql"/>
+    <server name="DB_DATABASE" value="api_instashare_test_db"/>
+    <server name="MAIL_MAILER" value="smtp"/>
+    <server name="MAIL_HOST" value="smtp.mailtrap.io"/>
+    <server name="MAIL_PORT" value="2525"/>
+    <server name="MAIL_USERNAME" value="4c780503c0da41"/>
+    <server name="MAIL_PASSWORD" value="801aeac91a4385"/>
+    <server name="MAIL_ENCRYPTION" value="null"/>
+    <server name="MAIL_FROM_ADDRESS" value="rhpalacios66@gmail.com"/>
+    <server name="MAIL_FROM_NAME" value="Insta Share"/>
+    <server name="QUEUE_CONNECTION" value="sync"/>
+    <server name="SESSION_DRIVER" value="array"/>
+    <server name="TELESCOPE_ENABLED" value="false"/>
+  </php>
+  <source>
+    <include>
+      <directory suffix=".php">./app</directory>
+    </include>
+  </source>
+</phpunit>
