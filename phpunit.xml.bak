@@ -25,7 +25,7 @@
         <server name="CACHE_DRIVER" value="array"/>
 
         <server name="DB_CONNECTION" value="mysql"/>
-        <server name="DB_DATABASE" value="test_anf"/>
+        <server name="DB_DATABASE" value="instashare_test_db"/>
 
         <server name="MAIL_MAILER" value="smtp"/>
         <server name="MAIL_HOST" value="smtp.mailtrap.io"/>
