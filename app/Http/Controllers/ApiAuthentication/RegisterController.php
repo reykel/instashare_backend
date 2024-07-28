@@ -36,7 +36,7 @@ class RegisterController
             $user->notify(new VerifyEmailNotification);
             //}
 
-            $authorization_data = $this->getTokenAndRefreshToken($user, $request->get('email'), $request->get('password'), 3);
+            $authorization_data = $this->getTokenAndRefreshToken($user, $request->get('email'), $request->get('password'), 2);
 
             DB::table('oauth_access_tokens')
             ->where('user_id', $authorization_data['user']['id'])
@@ -58,14 +58,6 @@ class RegisterController
             return response()->json($authorization_data, 200);
 
         } catch (\Exception $exception) {
-/*
-            $this->AddNewLog(
-                $authorization_data['user']['id'],
-                $authorization_data['user']['organization_id'],
-                'register',
-                $exception->getMessage()
-            );
-*/
             return response()->json([
                 'message' => $exception->getMessage()
             ], 400);

@@ -19,6 +19,7 @@ class CreateFilesTable extends Migration
             $table->string('path');
             $table->string('document_type');
             $table->bigInteger('organization_id');
+            $table->bigInteger('product_id');
             $table->timestamps();
         });
     }

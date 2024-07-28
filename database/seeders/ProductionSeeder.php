@@ -87,7 +87,17 @@ class ProductionSeeder extends Seeder
             ),
         ));
 
-
+        \DB::table('settings')->insert(array (
+            0 =>
+            array(
+                'id' => 1,
+                'key' => "key-parameter",
+                'value' => "Setting parameter value",
+                'created_at' =>now(),
+                'updated_at' => now(),
+            ),
+        ));
+        
         \DB::table('oauth_clients')->insert(array (
             0 =>
             array(

@@ -8,31 +8,20 @@ use App\Http\Controllers\API\ProductosController;
 use App\Http\Controllers\API\CategoriaController;
 
     Route::post('upload', [FileController::class, 'upload'])->middleware([
-        'auth:api', 'scopes:basic-user,tenant-admin'
+        'auth:api', 'scopes:basic-user,client-admin'
     ]);
 
-    Route::post('retrieve', [FileController::class, 'retrieve'])->middleware([
-        'auth:api', 'scopes:basic-user,tenant-admin'
+    Route::get('retrieve/{id}/', [FileController::class, 'retrieve'])->middleware([
+        'auth:api', 'scopes:basic-user,client-admin'
     ]);
 
     Route::post('eliminate', [FileController::class, 'delete'])->middleware([
-        'auth:api', 'scopes:basic-user,tenant-admin'
+        'auth:api', 'scopes:basic-user,client-admin'
     ]);
 
     Route::post('located', [FileController::class, 'file_located'])->middleware([
-        'auth:api', 'scopes:basic-user,tenant-admin'
+        'auth:api', 'scopes:basic-user,client-admin'
     ]);
-
-    Route::get('/myorganization', [OrganizationController::class, 'show'])
-    ->middleware(['auth:api', 'scopes:basic-user,tenant-admin']);
-
-    Route::apiResource('/authorized', AuthorizedController::class)->only([
-            'index', 'show', 'store','update'
-        ])->middleware(['auth:api', 'scope:basic-user,tenant-admin']);
-        
-    Route::apiResource('/authorized', AuthorizedController::class)->only([
-            'destroy'
-        ])->middleware(['auth:api', 'scope:basic-user,tenant-admin']);
 
     Route::apiResource('/producto', ProductosController::class)
         ->middleware(['auth:api', 'scopes:basic-user,client-admin']);

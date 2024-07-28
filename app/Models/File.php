@@ -10,5 +10,5 @@ class File extends Model
 {
     use HasFactory, FilterByUser;
 
-    protected $fillable = ['name', 'path', 'document_type'];
+    protected $fillable = ['name', 'path', 'document_type', 'product_id'];
 }

@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['PUT,POST,GET,DELETE,OPTIONS'],
 
-    'allowed_origins' => ['https://management.instashare.com','http://localhost:8080'],
+    'allowed_origins' => ['https://devblackstone.com','http://localhost:8080'],
 
     'allowed_origins_patterns' => [],
 
