@@ -21,7 +21,8 @@ This project is at an early stage of the development process. As a work-in-progr
 7. Run php artisan db:seed --class=ProductionSeeder
 7. Run php artisan passport:keys
 8. Set environment (.env) file with configuration data
-9. Run php artisan serve
+9. Create the folder uploads in /public/storage/ path
+10. Run php artisan serve
 
 Next step navigate to **http://localhost:8000/** to view the application.</p>
 
